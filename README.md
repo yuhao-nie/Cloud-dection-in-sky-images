@@ -1,5 +1,5 @@
-# Sun position identification
+# Sun tracking
 
-This repo provide codes for identifying the sun in a sky image
+This repo provide codes for tracking the sun in a sky image
 
 
