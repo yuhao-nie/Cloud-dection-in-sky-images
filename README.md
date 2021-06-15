@@ -1,3 +1,5 @@
-# Sky image classification
+# Sun position identification
 
-This project works on using red-to-blue ratio threshold methods to identify the cloud pixels in a sky image
+This repo provide codes for identifying the sun in a sky image
+
+
