@@ -1,5 +1,9 @@
-# Sun tracking
+# Cloud detection in sky images
 
-The position of the sun relative to cloud cover could provide useful information for predicting the power output of a solar PV system. This repo offers a method for identifying the sun position in a sky image taken from a ground-based fish-eye camera. The figure blow demonstrates the results of our sun tracking algorithm for three different sky conditions and the position of the sun in each image is indicated by the red spot.
+![demo_intermittency](/demo_data/demo_pv_output_cloudy_day.gif)
 
-![](./demo_images/20170520/20170520080000.jpg)
+Clouds significantly impact PV panel output and pose challenges to the large-scale deployment of solar PV systems. Accurate detection of clouds in sky images is a critical step in cloud modeling, which is essential for reliable solar power forecasting. 
+
+This repository presents an easy-to-implement yet effective algorithm for detecting clouds in ground-based sky images. This algorithm has been used in the study by [Nie et al. (2020)](https://pubs-aip-org.stanford.idm.oclc.org/aip/jrse/article/12/4/046101/284973) to identify cloud pixels in sky images for sky condition classification, which enables the development of tailored models for solar nowcasting specific to each sky condition. This classification-prediction framework show better performance with less model trainable parameters than the deep learning model [SUNSET](https://pubs-rsc-org.stanford.idm.oclc.org/en/content/articlehtml/2018/ee/c7ee03420b) that learns a map from sky images to PV power generation in an end-to-end fashion.
+
+<!--- ![](./demo_data/20170520/20170520080000.jpg) just --->
