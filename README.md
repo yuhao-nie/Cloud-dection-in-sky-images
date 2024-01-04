@@ -3,7 +3,9 @@
 Clouds significantly impact PV panel output and pose challenges to the large-scale deployment of solar PV systems. Accurate detection of clouds in sky images is a critical step in cloud modeling, which is essential for reliable solar power forecasting. 
 
 ![demo_intermittency](/figs/demo_pv_output_cloudy_day.gif)
+<p align=justify>
 Figure 1. Power output of a 30-kW roof-top PV system on a partly cloudy day. Note how PV output fluctuates during the cloud events.
+</p>
 
 This repository presents an easy-to-implement yet effective algorithm for detecting clouds in ground-based sky images. This algorithm has been used in the study by [Nie et al. (2020)](https://pubs-aip-org.stanford.idm.oclc.org/aip/jrse/article/12/4/046101/284973) to identify cloud pixels in sky images for sky condition classification, which enables the development of tailored models for solar nowcasting specific to each sky condition. This classification-prediction framework show better performance with less model trainable parameters than the deep learning model [SUNSET](https://pubs-rsc-org.stanford.idm.oclc.org/en/content/articlehtml/2018/ee/c7ee03420b) that learns a map from sky images to PV power generation in an end-to-end fashion.
 
@@ -19,9 +21,11 @@ where R and B stand for the pixel values of the red and blue channels of a sky i
 Applying a NRBR threshold works well when the sun is totally shrouded by clouds, but the results are not satisfactory when it is clear sky or when the sun is partially shrouded by clouds (see Figure 2). The alrgorithm misclassifies the circumsolar pixels as cloud pixels because such pixels are often brighter than other areas and have a white or yellow-white character that activates the NRBR threshold. 
 
 ![demo_intermittency](/figs/demo_NRBR.png)
-Figure 2. Red pixels in original image indicates the identified sun position. Green pixels in each cloud detection method indicates the identified
+<p align=justify>
+Figure 2. Cloud detection using NRBR method for different sky conditions: (a) sun entirely shrouded by
+clouds; (b) clear sky; and (c) sun partially shrouded by clouds. The pixels are identified as clouds when their NRBR$\leq0.05$. Red pixels in original image indicates the identified sun position. Green pixels in each cloud detection method indicates the identified
 cloud pixels.
-
+</p>
 
  The column ``Fixed threshold method" of Figure \ref{fig:cloud_detection_results} shows the pixels identified as clouds (highlighted with a light green transparent color) for different sky conditions when a fixed NRBR threshold 0.05 is applied. The pixels are identified as clouds when their NRBR$\mathrm{\leq0.05}$. It can be observed that the method works well when the sun is totally shrouded by clouds (see row (C) column ``Fixed threshold method" of Figure \ref{fig:cloud_detection_results}), but the results are not satisfactory when it is clear sky or when the sun is partially shrouded by clouds (see row (A) and (B) column ``Fixed threshold method" of Figure \ref{fig:cloud_detection_results}), mainly due to misclassification of the circumsolar area pixels as clouds.
 
