@@ -23,8 +23,7 @@ Applying a NRBR threshold works well when the sun is totally shrouded by clouds,
 ![demo_intermittency](/figs/demo_NRBR.png)
 <p align=justify>
 Figure 2. Cloud detection using NRBR method for different sky conditions: (a) sun entirely shrouded by
-clouds; (b) clear sky; and (c) sun partially shrouded by clouds. The pixels are identified as clouds when their NRBR$\leq0.05$. Red pixels in original image indicates the identified sun position. Green pixels in each cloud detection method indicates the identified
-cloud pixels.
+clouds; (b) clear sky; and (c) sun partially shrouded by clouds. The pixels are identified as clouds when their NRBR$\leq0.05$. The original sky image is on the left, and the image showing identified cloud pixels is on the right. Red pixels in original image indicates the identified sun position. Green pixels in the image indicates the identified cloud pixels.
 </p>
 
  The column ``Fixed threshold method" of Figure \ref{fig:cloud_detection_results} shows the pixels identified as clouds (highlighted with a light green transparent color) for different sky conditions when a fixed NRBR threshold 0.05 is applied. The pixels are identified as clouds when their NRBR$\mathrm{\leq0.05}$. It can be observed that the method works well when the sun is totally shrouded by clouds (see row (C) column ``Fixed threshold method" of Figure \ref{fig:cloud_detection_results}), but the results are not satisfactory when it is clear sky or when the sun is partially shrouded by clouds (see row (A) and (B) column ``Fixed threshold method" of Figure \ref{fig:cloud_detection_results}), mainly due to misclassification of the circumsolar area pixels as clouds.
