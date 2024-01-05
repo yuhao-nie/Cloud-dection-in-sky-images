@@ -35,27 +35,41 @@ We adopt this idea, but instead of generating clear sky image from the original 
 
 The difference of $\mathrm{NRBR}$ between the original image and the corresponding clear sky image is calculated, i.e., $\Delta\mathrm{NRBR =| NRBR - NRBR_{cs} |}$. $\Delta\mathrm{NRBR}$ is low for clear-sky pixels but is high for cloud pixels in the original image due to the background subtraction. A threshold value of 0.175 is selected empirically and used to identify the cloud pixels (i.e., if $\Delta\mathrm{NRBR}\geq0.175$, the pixels are identified as clouds).
 
-The CSL method can handle the circumsolar area misclassification well for the clear sky condition However, the method fails when there are clouds near the circumsolar area or when the sun is shrouded by clouds, as the circumsolar area is subtracted out from the clear sky image. The cloud pixels in the circumsolar area are not identified as cloud pixels since the $\Delta\mathrm{NRBR}$ values of these pixels will be lower than the threshold after the clear sky subtraction of the bright circumsolar area.
+The CSL method can handle the circumsolar area misclassification well for the clear sky condition. However, the method fails when there are clouds near the circumsolar area or when the sun is shrouded by clouds, as the circumsolar area is subtracted out from the clear sky image (see Figure 3 below). The cloud pixels in the circumsolar area are not identified as cloud pixels since the $\Delta\mathrm{NRBR}$ values of these pixels will be lower than the threshold after the clear sky subtraction of the bright circumsolar area.
 
+![demo_CSL](/figs/demo_CSL.png)
+<p align=justify>
+Figure 3. Cloud detection using CSL method for different sky conditions: (a) sun entirely shrouded by
+clouds; (b) clear sky; and (c) sun partially shrouded by clouds. The original sky image is on the left, and the image showing identified cloud pixels is on the right. Red pixels in original image indicates the sun position. Green pixels in the image indicates the identified cloud pixels. Note the misclassification of the pixels in the circumsolar area for scenario (b) and (c).
+</p>
 
-
-#### Sun position identification
+### Sun position identification
 A sun position identification algorithm is developed for use in the cloud detection. The major steps of the sun position identification algorithm is shown in Figure xx below. Polar coordinates $(\rho,\theta)$ are used to determine the position sun in a sky image and then converted to Cartesian coordinates $(x^*,y^*)$. $\rho$ and $\theta$ are computed respectively based on the linear correlation with zenith angle $\chi$ and azimuth angle $\xi$ of the sun via camera projection models [[4]](#4). The sun zenith angle $\chi$ and azimuth angle $\xi$ vary with time of year and day and are estimated through empirical functions by Da Rosa [[5]](#5). It should be noted that the daylight savings time change is considered for the estimation of the solar angles.
 
 ![sun_identification_alg](/figs/sun_position_identification_algorithm.png)
 <p align=center>
-Figure . Algorithm for identifying the sun position in a sky image.
+Figure 4. Algorithm for identifying the sun position in a sky image.
 </p>
 
 ### Our approach (NRBR+CSL)
-To correct this flaw, a modified threshold with background subtraction method (hereafter, referred to as MTw/BS method) is developed by taking advantages of the two methods described above, and is used for the sky images classification in this study. The process flow of the MTw/BS method is shown in Figure \ref{fig:cloud_detection_processes}.
+To correct this flaw of using NRBR and CSL alone, we develop an algorithm by taking advantages of the two methods (referred to as NRBR+CSL hereafter). The process flow of the NRBR+CSL method is shown in Figure 5 below.
 
 ![cloud_detection_alg](/figs/cloud_detection_algorithm.png)
 <p align=justify>
-Figure . The process flow of our proposed cloud detection algorithm. The algorithm makes use of both NRBR and CSL.
+Figure 5. The process flow of our proposed cloud detection algorithm. The algorithm makes use of both NRBR and CSL.
 </p>
 
-## Data, codes, and use case demonstration
+The method uses filters added to the output cloudiness of the CSL method. Specifically, if the cloudiness obtained is lower than a threshold value 0.045, CSL method is used. If it is higher than another threshold value 0.35, then we switch to the NRBR method. If it is in between these two thresholds, then we choose the NRBR method, but only apply it outside of the circumsolar area in the original image. The examples of results from NRBR+CSL method can be found in Figure 6, which show the effectiveness of the method for cloud detection.
+
+![demo_NRBR_CSL](/figs/demo_NRBR_CSL.png)
+<p align=justify>
+Figure 6. Cloud detection using NRBR+CSL method for different sky conditions: (a) sun entirely shrouded by
+clouds; (b) clear sky; and (c) sun partially shrouded by clouds. The original sky image is on the left, and the image showing identified cloud pixels is on the right. Red pixels in original image indicates the sun position. Green pixels in the image indicates the identified cloud pixels. Note the misclassification of the pixels in the circumsolar area for scenario (b) and (c).
+</p>
+
+## Codes
+
+## Use case demonstration
 
 
 
