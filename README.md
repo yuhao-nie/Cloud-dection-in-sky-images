@@ -71,8 +71,11 @@ clouds; (b) clear sky; and (c) sun partially shrouded by clouds. The original sk
 
 ## Use case demonstration
 
+apply the method to 10 cloudy days in 2017 and show the gifs.
 
+![demo_sun_ident](figs/cloud_detection_ts_sunny.mp4)
 
+![demo_cloud_detect](figs/cloud_detection_ts_cloudy.mp4)
 ## Limitations and future work
 poor adaptation, parameters need to be tuned for specific dataset. 
 
