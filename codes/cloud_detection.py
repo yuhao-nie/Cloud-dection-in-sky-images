@@ -6,7 +6,6 @@ Created on Sat Aug 10 16:55:00 2019
 
 import numpy as np
 import os
-import matplotlib.pyplot as plt
 from sun_position_identification import *
 
 def cloud_detection(time, image, csl_time=None):

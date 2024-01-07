@@ -6,9 +6,7 @@ Revised version on Feb 12 17:26:00 2020
 """
 
 import numpy as np
-import matplotlib.pyplot as plt
 from math import *
-import datetime
 import calendar
 
 def doy_tod_conv(date_and_time,longitude,time_zone_center_longitude):
