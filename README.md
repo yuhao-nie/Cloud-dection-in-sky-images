@@ -71,11 +71,12 @@ clouds; (b) clear sky; and (c) sun partially shrouded by clouds. The original sk
 
 ## Use case demonstration
 
-apply the method to 10 cloudy days in 2017 and show the gifs.
+The videos below show case our sun position identification algorithm and cloud detection algorithm.
 
-![demo_sun_ident](figs/cloud_detection_ts_sunny.mp4)
+https://github.com/yuhao-nie/Cloud-dection-in-sky-images/assets/29718809/3be2315b-aafa-4606-86ec-317a49388eac
 
-![demo_cloud_detect](figs/cloud_detection_ts_cloudy.mp4)
+https://github.com/yuhao-nie/Cloud-dection-in-sky-images/assets/29718809/ff788b0a-c092-4e59-bc6c-1cdaf80f5939
+
 ## Limitations and future work
 poor adaptation, parameters need to be tuned for specific dataset. 
 
