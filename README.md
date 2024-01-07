@@ -7,23 +7,23 @@ Clouds significantly impact PV panel output and pose challenges to the large-sca
 Figure 1. Power output of a 30-kW roof-top PV system on a partly cloudy day. Note how PV output fluctuates during the cloud events.
 </p>
 
-This repository presents an easy-to-implement yet effective algorithm for detecting clouds in ground-based sky images. This algorithm has been used in the study by [Nie et al. (2020)](https://pubs-aip-org.stanford.idm.oclc.org/aip/jrse/article/12/4/046101/284973) [[1]](#1) to identify cloud pixels in sky images for sky condition classification, which enables the development of tailored models for solar nowcasting specific to each sky condition. This classification-prediction framework show better performance with less model trainable parameters than the deep learning model [SUNSET](https://pubs-rsc-org.stanford.idm.oclc.org/en/content/articlehtml/2018/ee/c7ee03420b) that learns a map from sky images to PV power generation in an end-to-end fashion.
+This repository presents an easy-to-implement yet effective algorithm for detecting clouds in ground-based sky images. This algorithm has been used in the study by [Nie et al. (2020)](https://pubs-aip-org.stanford.idm.oclc.org/aip/jrse/article/12/4/046101/284973) [[1]](#1) to identify cloud pixels in sky images for sky condition classification, which enables the development of tailored models for solar nowcasting specific to each sky condition. This classification-prediction framework show better performance with less model trainable parameters than the deep learning model [SUNSET](https://pubs-rsc-org.stanford.idm.oclc.org/en/content/articlehtml/2018/ee/c7ee03420b) that learns a map from sky images to PV power generation in an end-to-end fashion. Here, we mainly focus on the cloud detection part of this work.
 
 ## Cloud detection algorithm
 The cloud detection algorithm essentially performs binary classification, i.e., distinguishing each pixel in a sky image as either a cloud or non-cloud pixel. Various methods have been developed for this purpose, ranging from simple thresholding techniques to more complex approaches such as neural network models, Markov Random Fields models, and Gaussian Mixture Models [[2]](#1).
 
-we select the thresholding method, favored for its simplicity and low computational requirements, which facilitates near real-time application. Our algorithm specifically integrates the **normalized red blue ratio (NRBR)** and **clear sky library (CSL)** methods. To better understand our proposed approach, it is essential to first explore NRBR and CSL and examine their advantages and limitations.
+We select the thresholding method, favored for its simplicity (no demanding image labeling involved like machine/deep learning methods), low computational requirements (no GPU required), and capability to implemented near real time. Our algorithm specifically integrates the **normalized red blue ratio (NRBR)** and **clear sky library (CSL)** methods. To better understand our proposed approach, it is essential to first introduce NRBR and CSL.
 
 ### NRBR
 $\mathrm{NRBR}$ is defined by the following equation: $$\mathrm{NRBR = \frac{B-R}{B+R}}$$
 where R and B stand for the pixel values of the red and blue channels of a sky image, , ranging from 0 to 255. According to the Rayleigh scattering law, the intensity of scattered light in clear air is inversely proportional to the fourth power of the wavelength [[3]](#2). This implies that the blue spectrum of visible light is predominately scattered in the clear atmosphere, whereas cloud particles scatter blue and red light almost equally [[2]](#2). It results that clear sky appears blue (pixels with high $\mathrm{NRBR}$) and clouds appear white or grey (pixels with low $\mathrm{NRBR}$). 
 
-Applying a $\mathrm{NRBR}$ threshold works well when the sun is totally shrouded by clouds, but the results are not satisfactory when it is clear sky or when the sun is partially shrouded by clouds (see Figure 2). The alrgorithm misclassifies the circumsolar pixels as cloud pixels because such pixels are often brighter than other areas and have a white or yellow-white character that activates the $\mathrm{NRBR}$ threshold. 
+Applying a $\mathrm{NRBR}$ threshold pixel-wise (i.e., the pixels are identified as clouds when their $\mathrm{NRBR}<=0.05$) works well when the sun is totally shrouded by clouds, but the results are not satisfactory when it is clear sky or when the sun is partially shrouded by clouds (see Figure 2). The alrgorithm misclassifies the circumsolar pixels as cloud pixels because such pixels are often brighter than other areas and have a white or yellow-white character that activates the $\mathrm{NRBR}$ threshold. 
 
 ![demo_NRBR](/figs/demo_NRBR.png)
 <p align=justify>
 Figure 2. Cloud detection using NRBR method for different sky conditions: (a) sun entirely shrouded by
-clouds; (b) clear sky; and (c) sun partially shrouded by clouds. The pixels are identified as clouds when their NRBR<=0.05. The original sky image is on the left, and the image showing identified cloud pixels is on the right. Red pixels in original image indicates the sun position. Green pixels in the image indicates the identified cloud pixels. Note the misclassification of the pixels in the circumsolar area for scenario (b) and (c).
+clouds; (b) clear sky; and (c) sun partially shrouded by clouds. The original sky image is on the left, and the image showing identified cloud pixels is on the right. Red pixels in original image indicates the sun position. Green pixels in the image indicates the identified cloud pixels. Note the misclassification of the pixels in the circumsolar area for scenario (b) and (c).
 </p>
 
 ### CSL
@@ -40,34 +40,37 @@ The CSL method can handle the circumsolar area misclassification well for the cl
 ![demo_CSL](/figs/demo_CSL.png)
 <p align=justify>
 Figure 3. Cloud detection using CSL method for different sky conditions: (a) sun entirely shrouded by
-clouds; (b) clear sky; and (c) sun partially shrouded by clouds. The original sky image is on the left, and the image showing identified cloud pixels is on the right. Red pixels in original image indicates the sun position. Green pixels in the image indicates the identified cloud pixels. Note the misclassification of the pixels in the circumsolar area for scenario (b) and (c).
-</p>
-
-### Sun position identification
-A sun position identification algorithm is developed for use in the cloud detection. The major steps of the sun position identification algorithm is shown in Figure xx below. Polar coordinates $(\rho,\theta)$ are used to determine the position sun in a sky image and then converted to Cartesian coordinates $(x^*,y^*)$. $\rho$ and $\theta$ are computed respectively based on the linear correlation with zenith angle $\chi$ and azimuth angle $\xi$ of the sun via camera projection models [[4]](#4). The sun zenith angle $\chi$ and azimuth angle $\xi$ vary with time of year and day and are estimated through empirical functions by Da Rosa [[5]](#5). It should be noted that the daylight savings time change is considered for the estimation of the solar angles.
-
-![sun_identification_alg](/figs/sun_position_identification_algorithm.png)
-<p align=center>
-Figure 4. Algorithm for identifying the sun position in a sky image.
+clouds; (b) clear sky; and (c) sun partially shrouded by clouds. The original sky image is on the left, and the image showing identified cloud pixels is on the right. Red pixels in original image indicates the sun position. Green pixels in the image indicates the identified cloud pixels. Note that although clear sky condition is handled correctly, the circumsolar area is inadvertently substracted out when the sun is entirely obscured by clouds.
 </p>
 
 ### Our approach (NRBR+CSL)
-To correct this flaw of using NRBR and CSL alone, we develop an algorithm by taking advantages of the two methods (referred to as NRBR+CSL hereafter). The process flow of the NRBR+CSL method is shown in Figure 5 below.
+To correct this flaw of using NRBR and CSL indiviudally, we develop an algorithm that takes advantages of the two methods (referred to as NRBR+CSL hereafter). The process diagram of the NRBR+CSL method is shown in Figure 4 below.
 
 ![cloud_detection_alg](/figs/cloud_detection_algorithm.png)
 <p align=justify>
-Figure 5. The process flow of our proposed cloud detection algorithm. The algorithm makes use of both NRBR and CSL.
+Figure 4. The process flow of our proposed cloud detection algorithm. The algorithm makes use of both NRBR and CSL.
 </p>
 
-The method uses filters added to the output cloudiness of the CSL method. Specifically, if the cloudiness obtained is lower than a threshold value 0.045, CSL method is used. If it is higher than another threshold value 0.35, then we switch to the NRBR method. If it is in between these two thresholds, then we choose the NRBR method, but only apply it outside of the circumsolar area in the original image. The examples of results from NRBR+CSL method can be found in Figure 6, which show the effectiveness of the method for cloud detection.
+The method uses filters added to the output cloudiness of the CSL method. Specifically, if the cloudiness obtained is lower than a threshold value 0.045, CSL method is used. If it is higher than another threshold value 0.35, then we switch to the NRBR method. If it is in between these two thresholds, then we choose the NRBR method, but only apply it outside of the circumsolar area in the original image. The examples of results from NRBR+CSL method can be found in Figure 5, which show the effectiveness of the method for cloud detection.
 
 ![demo_NRBR_CSL](/figs/demo_NRBR_CSL.png)
 <p align=justify>
-Figure 6. Cloud detection using NRBR+CSL method for different sky conditions: (a) sun entirely shrouded by
-clouds; (b) clear sky; and (c) sun partially shrouded by clouds. The original sky image is on the left, and the image showing identified cloud pixels is on the right. Red pixels in original image indicates the sun position. Green pixels in the image indicates the identified cloud pixels. Note the misclassification of the pixels in the circumsolar area for scenario (b) and (c).
+Figure 5. Cloud detection using NRBR+CSL method for different sky conditions: (a) sun entirely shrouded by
+clouds; (b) clear sky; and (c) sun partially shrouded by clouds. The original sky image is on the left, and the image showing identified cloud pixels is on the right. Red pixels in original image indicates the sun position. Green pixels in the image indicates the identified cloud pixels. Note all three sky conditions are handled nicely by the proposed NRBR+CSL method.
 </p>
 
-## Codes
+### Sun position identification
+A sun position identification algorithm is developed for use in the cloud detection. The major steps of the sun position identification algorithm is shown in Figure 6 below. Polar coordinates $(\rho,\theta)$ are used to determine the position sun in a sky image and then converted to Cartesian coordinates $(x^*,y^*)$. $\rho$ and $\theta$ are computed respectively based on the linear correlation with zenith angle $\chi$ and azimuth angle $\xi$ of the sun via camera projection models [[4]](#4). The sun zenith angle $\chi$ and azimuth angle $\xi$ vary with time of year and day and are estimated through empirical functions by Da Rosa [[5]](#5). It should be noted that the daylight savings time change is considered for the estimation of the solar angles.
+
+![sun_identification_alg](/figs/sun_position_identification_algorithm.png)
+<p align=center>
+Figure 6. Algorithm for identifying the sun position in a sky image.
+</p>
+
+## Codes and data
+The Python codes for the sun position identification (`sun_position_identification.py`) and cloud detection (`cloud_detection.py`) algorithms are provided in the `codes` directory. In the same folder, the notebook file (`demo.ipynb`) provides guidelines on how to use the functions within the two Python code files.
+
+For demonstration purposes, we select sky images from 3 sunny days and 3 cloudys to validate the sun position identification and the cloud detection algorithms. The image time series data are collected in 2017 provided have a temporal resolution of 1 minute. To save algorithm implementation time, we sample it every 3 minutes. As our cloud detection method is non-parametric, it does not require image labels for training as machine/deep learning models. 
 
 ## Use case demonstration
 
