@@ -99,7 +99,7 @@ Although our algorithm is simple, it shows fairly good performance in various sk
 
 First, the algorithm could struggle when there are thin/wispy clouds present in the sky image. Such clouds are naturally hard to be recognized by the proposed algorithm.
 
-Second, if there are small amount of clouds and the clouds are mostly present within the circumsolar region (we define) of the image, given the CSL method applied by our alogrithm, these pixels will be subtracted out and not be recognized as the cloud pixels.
+Second, if there are small amount of clouds in the sky image and these clouds are mostly present within the circumsolar region, given the CSL method applied by our alogrithm, these pixels will be subtracted out and not be recognized as the cloud pixels.
 
 Besides, the algorithm is not self-adaptive. Parameters used in the algorithm need to be updated when a new set of images from a different sky camera is used. These parameters include but not limited to the geo-location paramters for sun position identification, the sky camera orientation, and different thresholding parameters used in cloud detection. 
 
