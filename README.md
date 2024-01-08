@@ -103,7 +103,7 @@ Second, if there are small amount of clouds and the clouds are mostly present wi
 
 Besides, the algorithm is not self-adaptive. Parameters used in the algorithm need to be updated when a new set of images from a different sky camera is used, for example, the geo-location paramters for sun position identification and different thresholding parameters used in cloud detection. 
 
-For future work, the generalization of the proposed cloud detection algorithm could be validated using other sky image datasets. Additionally, according to our review study [[6]](#6), there are increasing open-source sky image datasets available in recent years, and some of them provide segmentation map of sky images. Deep learning models generally achieve superior performance over other methods. The bottleneck is the availability of the labeled data. With large amount of diverse sky image samples available, training deep learning models become a viable option.
+For future work, the generalization of the proposed cloud detection algorithm could be validated using other sky image datasets. Additionally, according to our review study [[6]](#6), there are increasing open-source sky image datasets available in recent years, and some of them provide segmentation map of sky images. Deep learning models generally achieve superior performance over other methods [[7]](#7). The bottleneck is the availability of the labeled data. With large amount of diverse sky image samples available, training deep learning models become a viable option.
 
 ## References
 <a id="1">[1]</a> 
@@ -123,3 +123,6 @@ Da Rosa, A.V. and Ordóñez, J.C., 2021. Fundamentals of renewable energy proces
 
 <a id="6">[6]</a>
 Nie, Y., Li, X., Paletta, Q., Aragon, M., Scott, A. and Brandt, A., 2024. Open-source sky image datasets for solar forecasting with deep learning: A comprehensive survey. Renewable and Sustainable Energy Reviews, 189, p.113977.
+
+<a id="7">[7]</a>
+Hasenbalg, M., Kuhn, P., Wilbert, S., Nouri, B. and Kazantzidis, A., 2020. Benchmarking of six cloud segmentation algorithms for ground-based all-sky imagers. Solar Energy, 201, pp.596-614.
