@@ -105,6 +105,24 @@ Besides, the algorithm is not self-adaptive. Parameters used in the algorithm ne
 
 For future work, the generalization of the proposed cloud detection algorithm could be validated using other sky image datasets. Additionally, according to our review study [[6]](#6), there are increasing open-source sky image datasets available in recent years, and some of them provide segmentation map of sky images. Deep learning models generally achieve superior performance over other methods [[7]](#7). The bottleneck is the availability of the labeled data. With large amount of diverse sky image samples available, training deep learning models become a viable option.
 
+## Citation
+If you find this work useful to your research, please cite:
+```
+Nie, Y., Sun, Y., Chen, Y., Orsini, R., & Brandt, A. (2020). PV power output prediction from sky images using convolutional neural network: The comparison of sky-condition-specific sub-models and an end-to-end model. Journal of Renewable and Sustainable Energy, 12(4).
+```
+or
+```
+@article{nie2020pv,
+  title={PV power output prediction from sky images using convolutional neural network: The comparison of sky-condition-specific sub-models and an end-to-end model},
+  author={Nie, Yuhao and Sun, Yuchi and Chen, Yuanlei and Orsini, Rachel and Brandt, Adam},
+  journal={Journal of Renewable and Sustainable Energy},
+  volume={12},
+  number={4},
+  year={2020},
+  publisher={AIP Publishing}
+}
+```
+
 ## References
 <a id="1">[1]</a> 
 Nie, Y., Sun, Y., Chen, Y., Orsini, R. and Brandt, A., 2020. PV power output prediction from sky images using convolutional neural network: The comparison of sky-condition-specific sub-models and an end-to-end model. Journal of Renewable and Sustainable Energy, 12(4).
