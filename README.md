@@ -101,7 +101,7 @@ First, the algorithm could struggle when there are thin/wispy clouds present in 
 
 Second, if there are small amount of clouds and the clouds are mostly present within the circumsolar region (we define) of the image, given the CSL method applied by our alogrithm, these pixels will be subtracted out and not be recognized as the cloud pixels.
 
-Besides, the algorithm is not self-adaptive. Parameters used in the algorithm need to be updated when a new set of images from a different sky camera is used, for example, the geo-location paramters for sun position identification and different thresholding parameters used in cloud detection. 
+Besides, the algorithm is not self-adaptive. Parameters used in the algorithm need to be updated when a new set of images from a different sky camera is used. These parameters include but not limited to the geo-location paramters for sun position identification, the sky camera orientation, and different thresholding parameters used in cloud detection. 
 
 For future work, the generalization of the proposed cloud detection algorithm could be validated using other sky image datasets. Additionally, according to our review study [[6]](#6), there are increasing open-source sky image datasets available in recent years, and some of them provide segmentation map of sky images. Deep learning models generally achieve superior performance over other methods [[7]](#7). The bottleneck is the availability of the labeled data. With large amount of diverse sky image samples available, training deep learning models become a viable option.
 
