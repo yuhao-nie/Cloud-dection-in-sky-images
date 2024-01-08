@@ -1,15 +1,15 @@
 # Cloud detection in sky images
 
-| [**Paper**](https://doi.org/10.1063/5.0014016) | [**Dataset**](https://github.com/yuhao-nie/Stanford-solar-forecasting-dataset) |
+This repository presents an easy-to-implement yet effective algorithm for detecting clouds in ground-based sky images. The algorithm has been used in the study by [Nie et al. (2020)](https://doi.org/10.1063/5.0014016) [[1]](#1) to identify cloud pixels in sky images for sky condition classification, which enables the development of tailored models for solar nowcasting specific to each sky condition. Here, we demonstrate the effectiveness of our algorithm using some sample data. The full dataset can be assessed via our [SKIPP'D GitHub Repository](https://github.com/yuhao-nie/Stanford-solar-forecasting-dataset).
 
+
+## Context
 Clouds significantly impact PV panel output and pose challenges to the large-scale deployment of solar PV systems. Accurate detection of clouds in sky images is a critical step in cloud modeling, which is essential for reliable solar power forecasting. 
 
 ![demo_intermittency](/figs/demo_pv_output_cloudy_day.gif)
 <p align=justify>
 Figure 1. Power output of a 30-kW roof-top PV system on a partly cloudy day. Note how PV output fluctuates during the cloud events.
 </p>
-
-This repository presents an easy-to-implement yet effective algorithm for detecting clouds in ground-based sky images. This algorithm has been used in the study by [Nie et al. (2020)](https://doi.org/10.1063/5.0014016) [[1]](#1) to identify cloud pixels in sky images for sky condition classification, which enables the development of tailored models for solar nowcasting specific to each sky condition. This classification-prediction framework show better performance with less model trainable parameters than the deep learning model [SUNSET](https://doi.org/10.1039/C7EE03420B) that learns a map from sky images to PV power generation in an end-to-end fashion. Here, we mainly focus on the cloud detection part of this work.
 
 ## Cloud detection algorithm
 The cloud detection algorithm essentially performs binary classification, i.e., distinguishing each pixel in a sky image as either a cloud or non-cloud pixel. Various methods have been developed for this purpose, ranging from simple thresholding techniques to more complex approaches such as neural network models, Markov Random Fields models, and Gaussian Mixture Models [[2]](#1).
@@ -72,19 +72,19 @@ Figure 6. Algorithm for identifying the sun position in a sky image.
 ## Codes and data
 The Python codes for the sun position identification (`sun_position_identification.py`) and cloud detection (`cloud_detection.py`) algorithms are provided in the `codes` directory. In the same folder, the notebook file (`demo.ipynb`) provides guidelines on how to use the functions within the two Python code files. All dependencies are listed in the file `requirements.txt`.
 
-As our cloud detection method is non-parametric, no image labels are required. For demonstration purposes, we select sky images from 3 sunny days and 3 cloudys in 2017 with 1-minute temporal resolution [^2], to validate the sun position identification and the cloud detection algorithms. The image data are from our curated sky image and PV power generation dataset SKIPP'D ([Dataset paper](https://doi.org/10.1016/j.solener.2023.03.043) and [Github repo](https://github.com/yuhao-nie/Stanford-solar-forecasting-dataset)). Data for validating the algorithms are provided in the `data` directory. A description of the data files are provided in the table below.
+As our cloud detection method is non-parametric, no image labels are required. For demonstration purposes, we select sky images from 3 sunny days and 3 cloudys in 2017 with 1-minute temporal resolution [^2], to validate the sun position identification and the cloud detection algorithms. The image data are from our curated sky image and PV power generation dataset SKIPP'D ([Dataset paper](https://doi.org/10.1016/j.solener.2023.03.043) and [Github repo](https://github.com/yuhao-nie/Stanford-solar-forecasting-dataset)). Data for validating the algorithms are provided in the `sample_data` directory. A description of the data files are provided in the table below.
 
 [^2]: To save time for implementation the algorithm and visualizing the results, we sample it every 3 minutes in the `demo.ipynb`.
 
 |File|Description|
 |-----|-----|
-|`time_stamps_sunny.npy`||
-|`sky_images_sunny.npy`||
-|`time_stamps_cloudy.npy`||
-|`sky_images_cloudy.npy`||
-|`clear_sky_library/csl_images.npy`||
-|`clear_sky_library/csl_times.npy`||
-|`clear_sky_library/csl_sun_center.npy`||
+|`sky_images_sunny.npy`|Python NumPy array consists of 3 days of sunny sky image data.|
+|`time_stamps_sunny.npy`|Python NumPy array of the time stamps corresponding to the sunny sky image data.|
+|`sky_images_cloudy.npy`|Python NumPy array consists of 3 days of cloudy sky image data.|
+|`time_stamps_cloudy.npy`|Python NumPy array of the time stamps corresponding to the cloudy sky image data.|
+|`clear_sky_library/csl_images.npy`|Python NumPy array of 4 days of clear sky image data contained in the clear sky libaray (for use in CSL method).|
+|`clear_sky_library/csl_times.npy`|Python NumPy array of time stamps corresponding to the clear sky images.|
+|`clear_sky_library/csl_sun_center.npy`|Python NumPy array of the sun position coordinates in formate of (X,Y) corresponding to the clear sky images.|
 
 ## Use case demonstration
 
