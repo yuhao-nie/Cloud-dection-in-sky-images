@@ -20,7 +20,7 @@ We select the thresholding method, favored for its simplicity (no demanding imag
 $\mathrm{NRBR}$ is defined by the following equation: $$\mathrm{NRBR = \frac{B-R}{B+R}}$$
 where R and B stand for the pixel values of the red and blue channels of a sky image, , ranging from 0 to 255. According to the Rayleigh scattering law, the intensity of scattered light in clear air is inversely proportional to the fourth power of the wavelength [[3]](#2). This implies that the blue spectrum of visible light is predominately scattered in the clear atmosphere, whereas cloud particles scatter blue and red light almost equally [[2]](#2). It results that clear sky appears blue (pixels with high $\mathrm{NRBR}$) and clouds appear white or grey (pixels with low $\mathrm{NRBR}$). 
 
-Applying a $\mathrm{NRBR}$ threshold pixel-wise (i.e., the pixels are identified as clouds when their $\mathrm{NRBR}<=0.05$) works well when the sun is totally shrouded by clouds, but the results are not satisfactory when it is clear sky or when the sun is partially shrouded by clouds (see Figure 2). The alrgorithm misclassifies the circumsolar pixels as cloud pixels because such pixels are often brighter than other areas and have a white or yellow-white character that activates the $\mathrm{NRBR}$ threshold. 
+Applying a $\mathrm{NRBR}$ threshold pixel-wise (i.e., the pixels are identified as clouds when their $\mathrm{NRBR}<=0.05$) works well when the sun is totally shrouded by clouds, but the results are not satisfactory when it is clear sky or when the sun is partially shrouded by clouds (see Figure 2). The alrgorithm misclassifies the circumsolar area pixels, which are pixels within a radius of 7 pixels centered on the sun, as cloud pixels because such pixels are often brighter than other areas and have a white or yellow-white character that activates the $\mathrm{NRBR}$ threshold. 
 
 ![demo_NRBR](/figs/demo_NRBR.png)
 <p align=justify>
@@ -88,16 +88,22 @@ As our cloud detection method is non-parametric, no image labels are required. F
 
 ## Use case demonstration
 
-The videos below show case our sun position identification algorithm and cloud detection algorithm.
+The videos below show case our sun position identification algorithm and cloud detection algorithm. Here we show only one sunny days and one cloudy days. Feel free to try more days with our data.
 
 https://github.com/yuhao-nie/Cloud-dection-in-sky-images/assets/29718809/3be2315b-aafa-4606-86ec-317a49388eac
 
 https://github.com/yuhao-nie/Cloud-dection-in-sky-images/assets/29718809/ff788b0a-c092-4e59-bc6c-1cdaf80f5939
 
 ## Limitations and future work
-poor adaptation, parameters need to be tuned for specific dataset. 
+Although our algorithm is simple, it shows fairly good performance in various sky conditions. However, there are a few limitations need to be noted. 
 
-Neural network, need labels
+First, the algorithm could struggle when there are thin/wispy clouds present in the sky image. Such clouds are naturally hard to be recognized by the proposed algorithm.
+
+Second, if there are small amount of clouds and the clouds are mostly present within the circumsolar region (we define) of the image, given the CSL method applied by our alogrithm, these pixels will be subtracted out and not be recognized as the cloud pixels.
+
+Besides, the algorithm is not self-adaptive. Parameters used in the algorithm need to be updated when a new set of images from a different sky camera is used, for example, the geo-location paramters for sun position identification and different thresholding parameters used in cloud detection. 
+
+For future work, the generalization of the proposed cloud detection algorithm could be validated using other sky image datasets. Additionally, according to our review study [[6]](#6), there are increasing open-source sky image datasets available in recent years, and some of them provide segmentation map of sky images. Deep learning models generally achieve superior performance over other methods. The bottleneck is the availability of the labeled data. With large amount of diverse sky image samples available, training deep learning models become a viable option.
 
 ## References
 <a id="1">[1]</a> 
@@ -114,3 +120,6 @@ Garcia-Gil, G. and Ramirez, J.M., 2019. Fish-eye camera and image processing for
 
 <a id="5">[5]</a>
 Da Rosa, A.V. and Ordóñez, J.C., 2021. Fundamentals of renewable energy processes. Academic Press.
+
+<a id="6">[6]</a>
+Nie, Y., Li, X., Paletta, Q., Aragon, M., Scott, A. and Brandt, A., 2024. Open-source sky image datasets for solar forecasting with deep learning: A comprehensive survey. Renewable and Sustainable Energy Reviews, 189, p.113977.
