@@ -45,7 +45,7 @@ Figure 3. Cloud detection using CSL method for different sky conditions: (a) sun
 clouds; (b) clear sky; and (c) sun partially shrouded by clouds. The original sky image is on the left, and the image showing identified cloud pixels is on the right. Red pixels in original image indicates the sun position. Green pixels in the image indicates the identified cloud pixels. Note that although clear sky condition is handled correctly, the circumsolar area is inadvertently substracted out when the sun is entirely obscured by clouds.
 </p>
 
-### Our approach (NRBR+CSL)
+### NRBR+CSL (Our approach)
 To correct this flaw of using NRBR and CSL indiviudally, we develop an algorithm that takes advantages of the two methods (referred to as NRBR+CSL hereafter). The process diagram of the NRBR+CSL method is shown in Figure 4 below.
 
 ![cloud_detection_alg](/figs/cloud_detection_algorithm.png)
