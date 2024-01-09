@@ -29,7 +29,7 @@ clouds; (b) clear sky; and (c) sun partially shrouded by clouds. The original sk
 </p>
 
 ### CSL
-Chauvin *et al.* [[2]](#2) apply a background subtraction to tackle the issue of misclassifying pixels in the circumsolar area. The essence is to apply a background subtraction using a clear sky image, which is generated from the original image by a fitted empirical sky luminance model, and set the threshold to the difference of $\mathrm{NRBR}$ between the original image and the clear sky image.
+Chauvin *et al.* [[2]](#2) apply a background subtraction using a clear sky image to tackle the issue of misclassifying pixels in the circumsolar area. It sets a threshold to the difference of $\mathrm{NRBR}$ between the original image and the clear sky image. The clear sky image is generated from the original image by a fitted empirical sky luminance model.
 
 We adopt this idea, but instead of generating clear sky image from the original image, we establish a clear sky library (CSL) by sampling 4 clear sky days from our [dataset](https://github.com/yuhao-nie/Stanford-solar-forecasting-dataset), i.e., May 20, August 15, September 23 and October 22 of 2017, with 5-minute frequency. These days are found to be sufficient for representing the track of the sun over a year [^1]. For background subtraction, we match the original image with a clear sky image from the CSL with a similar sun position. The sun position identification is a separate algorithm developed in this study based on camera projection model and the sun angle, which is detailed in the following subsection. 
 
