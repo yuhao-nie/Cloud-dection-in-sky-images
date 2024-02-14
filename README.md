@@ -4,7 +4,7 @@ This repository presents an easy-to-implement yet effective algorithm for detect
 
 
 ## Context
-Clouds significantly impact PV panel output and pose challenges to the large-scale deployment of solar PV systems. Accurate detection of clouds in sky images is a critical step in cloud modeling, which is essential for reliable solar power forecasting. 
+Clouds can significantly impact PV panel output and pose challenges to the large-scale deployment of solar PV systems. Accurate detection of clouds is a critical step in cloud modeling, which is essential for reliable solar power forecasting. 
 
 ![demo_intermittency](/figs/demo_pv_output_cloudy_day.gif)
 <p align=justify>
