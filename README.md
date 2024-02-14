@@ -12,9 +12,9 @@ Figure 1. Power output of a 30-kW roof-top PV system on a partly cloudy day. Not
 </p>
 
 ## Cloud detection algorithm
-The cloud detection algorithm essentially performs binary classification, i.e., distinguishing each pixel in a sky image as either a cloud or non-cloud pixel. Various methods have been developed for this purpose, ranging from simple thresholding techniques to more complex approaches such as neural network models, Markov Random Fields models, and Gaussian Mixture Models [[2]](#1).
+Cloud detection algorithms essentially perform binary classification to distinguish each pixel in a sky image as either a cloud or non-cloud pixel. Various methods have been developed for this purpose, ranging from simple thresholding techniques to more complex approaches such as neural network models, Markov Random Fields models, and Gaussian Mixture Models [[2]](#1).
 
-We select the thresholding method, favored for its simplicity (no demanding image labeling involved like machine/deep learning methods), low computational requirements (no GPU required), and capability to implemented near real time. Our algorithm specifically integrates the **normalized red blue ratio (NRBR)** and **clear sky library (CSL)** methods. To better understand our proposed approach, it is essential to first introduce NRBR and CSL.
+We select the thresholding method here, favored for its simplicity (no demanding image labeling involved like machine/deep learning methods), low computational requirements (no GPU required), and capability to be implemented near real time. Our algorithm specifically integrates the **normalized red blue ratio (NRBR)** and **clear sky library (CSL)** methods. To better understand our proposed approach, let's first introduce NRBR and CSL.
 
 ### NRBR
 $\mathrm{NRBR}$ is defined by the following equation: $$\mathrm{NRBR = \frac{B-R}{B+R}}$$
